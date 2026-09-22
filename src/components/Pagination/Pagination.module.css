@@ -1,0 +1,38 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0;
+}
+
+.pageItem {
+  display: flex;
+}
+
+.pageLink {
+  display: grid;
+  place-items: center;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  padding: 0 0.75rem;
+  border-radius: 0.7rem;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  color: #e2e8f0;
+  text-decoration: none;
+  cursor: pointer;
+  background: rgba(15, 23, 42, 0.85);
+}
+
+.activePage .pageLink {
+  background: #0284c7;
+  border-color: #38bdf8;
+  color: #f8fafc;
+}
+
+.disabledPage .pageLink {
+  opacity: 0.45;
+  cursor: not-allowed;
+}

@@ -1,0 +1,40 @@
+.app {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(59, 130, 246, 0.2), transparent 30%),
+    linear-gradient(180deg, #020817 0%, #0f172a 100%);
+  color: #f8fafc;
+  padding: 2rem 1rem 3rem;
+}
+
+.toolbar {
+  max-width: 1200px;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.button {
+  border: none;
+  border-radius: 0.9rem;
+  background: linear-gradient(135deg, #38bdf8, #2563eb);
+  color: #eff6ff;
+  padding: 0.85rem 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.status,
+.statusError {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 0;
+  color: #cbd5e1;
+}
+
+.statusError {
+  color: #fca5a5;
+}
