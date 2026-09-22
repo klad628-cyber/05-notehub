@@ -36,14 +36,6 @@ const App = () => {
     placeholderData: keepPreviousData,
   });
 
-  const createMutation = useMutation({
-    mutationFn: createNote,
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["notes"] });
-      setIsModalOpen(false);
-    },
-  });
-
   const deleteMutation = useMutation({
     mutationFn: deleteNote,
     onSuccess: async () => {
@@ -60,18 +52,6 @@ const App = () => {
     }
   }, [search]);
 
-  const handleCreateNote = async (values: NoteFormValues) => {
-    await createMutation.mutateAsync({
-      title: values.title.trim(),
-      content: values.content.trim(),
-      tag: values.tag,
-    });
-  };
-
-  const handleDeleteNote = async (id: string | number) => {
-    await deleteMutation.mutateAsync(id);
-  };
-
   const handleSearchChange = (value: string) => {
     debouncedSearch(value);
   };
@@ -81,11 +61,13 @@ const App = () => {
       <header className={styles.toolbar}>
         <SearchBox value={search} onChange={handleSearchChange} />
 
-        <Pagination
-          pageCount={totalPages}
-          currentPage={page}
-          onPageChange={setPage}
-        />
+        {totalPages > 1 ? (
+          <Pagination
+            pageCount={totalPages}
+            currentPage={page}
+            onPageChange={setPage}
+          />
+        ) : null}
 
         <button
           type="button"
@@ -105,7 +87,7 @@ const App = () => {
       ) : null}
 
       {!isPending && !isError && notes.length > 0 ? (
-        <NoteList notes={notes} onDelete={handleDeleteNote} />
+        <NoteList notes={notes} />
       ) : null}
 
       {!isPending && !isError && notes.length === 0 ? (
@@ -114,8 +96,8 @@ const App = () => {
 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <NoteForm
-          onSubmit={handleCreateNote}
           onCancel={() => setIsModalOpen(false)}
+          onSuccess={() => setIsModalOpen(false)}
         />
       </Modal>
     </div>

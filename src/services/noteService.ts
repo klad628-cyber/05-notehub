@@ -43,14 +43,15 @@ const normalizeTag = (value: unknown): NoteTag => {
 
 const normalizeNote = (value: unknown): Note => {
   const note = (value ?? {}) as Record<string, unknown>;
+  const now = new Date().toISOString();
 
   return {
-    id: (note.id ?? note._id ?? crypto.randomUUID()) as string | number,
+    id: String(note.id ?? note._id ?? crypto.randomUUID()),
     title: String(note.title ?? "Untitled"),
     content: String(note.content ?? ""),
     tag: normalizeTag(note.tag),
-    createdAt: typeof note.createdAt === "string" ? note.createdAt : undefined,
-    updatedAt: typeof note.updatedAt === "string" ? note.updatedAt : undefined,
+    createdAt: typeof note.createdAt === "string" ? note.createdAt : now,
+    updatedAt: typeof note.updatedAt === "string" ? note.updatedAt : now,
   };
 };
 

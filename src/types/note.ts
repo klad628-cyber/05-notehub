@@ -9,12 +9,12 @@ export const NOTE_TAGS = [
 export type NoteTag = (typeof NOTE_TAGS)[number];
 
 export interface Note {
-  id: string | number;
+  id: string;
   title: string;
   content: string;
   tag: NoteTag;
-  createdAt?: string;
-  updatedAt?: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface CreateNotePayload {
